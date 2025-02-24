@@ -1,11 +1,8 @@
 import './App.css'
+import Navbar from './components/Navbar'
 
 function App() {
-  
-
-  return (
-    <div className='bg-black h-8 w-8'></div>
-  )
+	return <Navbar />
 }
 
 export default App
