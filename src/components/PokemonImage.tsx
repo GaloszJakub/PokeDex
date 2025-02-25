@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react'
+import { fetchPokemon } from '../Services/ApiService'
 
 interface Sprites {
 	other: {
@@ -19,23 +20,19 @@ export function PokemonImage() {
 	const [error, setError] = useState<string | null>(null)
 
 	useEffect(() => {
-		fetch('https://pokeapi.co/api/v2/pokemon/pikachu')
-			.then(res => {
-				if (!res.ok) throw new Error('Błąd sieciowy')
-				return res.json()
-			})
+		fetchPokemon('pikachu')
 			.then(data => {
 				setPokemon(data)
 				setLoading(false)
 			})
 			.catch(err => {
-				setError(err.toString())
+				setError(err.message)
 				setLoading(false)
 			})
 	}, [])
 
-	if (loading) return <div>Ładowanie...</div>
-	if (error) return <div>Błąd: {error}</div>
+	if (loading) return <div>Loading...</div>
+	if (error) return <div>Error: {error}</div>
 
 	return (
 		<div className="flex flex-col items-center p-4">
