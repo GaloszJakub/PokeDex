@@ -1,6 +1,5 @@
 import MainSlider from '../components/MainPage/MainSlider'
 import SearchBar from '../components/MainPage/SearchBar'
-import { PokemonImage } from '../components/PokemonImage'
 
 export default function MainPage() {
 	return (
@@ -8,7 +7,6 @@ export default function MainPage() {
 			<div className="flex flex-col ">
 				<SearchBar />
 				<MainSlider />
-				<PokemonImage />
 			</div>
 		</div>
 	)
