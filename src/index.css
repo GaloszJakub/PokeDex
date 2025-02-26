@@ -1,1 +1,16 @@
 @import "tailwindcss";
+
+@theme {  
+    --color-accent: #f7c028; 
+    --color-background: #bdc3c9; 
+    --color-main: #f2f2f2;
+}
+
+.hide-scrollbar {
+    scrollbar-width: none; /* Dla Firefox */
+    -ms-overflow-style: none; /* Dla Internet Explorer i Edge */
+}
+
+.hide-scrollbar::-webkit-scrollbar {
+    display: none; /* Dla Chrome, Safari i Opera */
+}
