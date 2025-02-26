@@ -6,7 +6,7 @@ const headingStyles = 'uppercase text-xl text-center font-semibold mb-5'
 
 export default function PokemonOverview() {
 	return (
-		<div className="grid grid-cols-3 h-full overflow-hidden w-2/5   bg-white rounded-sm p-5 ">
+		<div className="grid grid-cols-3 h-full overflow-hidden w-3/5   bg-white rounded-sm p-5 ">
 			<div className="h-full overflow-hidden">
 				<h2 className={headingStyles}>abilities</h2>
 				<Abilities />
