@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { typeColors } from "../../utils/utils";
-import { fetchPokemon } from "../../Services/ApiService";
+import { fetchPokemon } from "../../services/ApiService";
+
 
 interface PokemonProps {
     pokemonName: string;
@@ -31,8 +32,8 @@ export default function GridCard({ pokemonName }: PokemonProps) {
     if (!pokemon) return <p>Ładowanie...</p>;
 
     return (
-        <div className="bg-main w-64 h-64 rounded-2xl shadow-xl p-4 hover:scale-110 duration-300 transform transition">
-            <div className="flex flex-col items-center cursor-pointer">
+        <div className="bg-main w-64 h-64 rounded-2xl shadow-xl p-4 hover:scale-110 duration-300 transform transition cursor-pointer">
+            <div className="flex flex-col items-center ">
                 <img src={pokemon.image} alt={pokemon.name} className="w-32 h-32 object-contain" />
                 <h2 className="text-lg font-bold capitalize">{pokemon.name}</h2>
             </div>
@@ -41,7 +42,7 @@ export default function GridCard({ pokemonName }: PokemonProps) {
                     {pokemon.types.map((type) => (
                         <span
                             key={type}
-                            className={`px-2 py-1 rounded-lg  capitalize text-white mt-6 text-center cursor-pointer  ${
+                            className={`px-2 py-1 rounded-lg  capitalize text-white mt-6 text-center hover:scale-110 duration-300 transform transition  ${
                                 typeColors[type] || "bg-gray-500"
                             }`}
                         >

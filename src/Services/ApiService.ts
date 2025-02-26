@@ -114,3 +114,12 @@ export async function fetchPokemon(name: string): Promise<PokemonData> {
 	if (!res.ok) throw new Error('Błąd sieciowy')
 	return res.json() as Promise<PokemonData>
 }
+
+
+
+// services/ApiService.ts
+export async function fetchPokemonList(offset: number = 0, limit: number = 30) {
+    const response = await fetch(`https://pokeapi.co/api/v2/pokemon?offset=${offset}&limit=${limit}`);
+    if (!response.ok) throw new Error("Failed to fetch Pokémon list");
+    return response.json();
+}
