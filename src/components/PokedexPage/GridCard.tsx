@@ -31,7 +31,7 @@ export default function GridCard({ pokemonName }: PokemonProps) {
     if (!pokemon) return <p>Ładowanie...</p>;
 
     return (
-        <div className="bg-main w-64 h-64 rounded-2xl shadow-xl p-4">
+        <div className="bg-main w-64 h-64 rounded-2xl shadow-xl p-4 hover:scale-110 duration-300 transform transition">
             <div className="flex flex-col items-center cursor-pointer">
                 <img src={pokemon.image} alt={pokemon.name} className="w-32 h-32 object-contain" />
                 <h2 className="text-lg font-bold capitalize">{pokemon.name}</h2>

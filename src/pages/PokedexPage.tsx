@@ -7,7 +7,7 @@ export default function PokedexPage() {
         <div className="bg-background w-full h-screen rounded-l-2xl ml-[-20px] z-30">
             <div className="flex flex-col h-full  ">
                 
-                <div className="flex-shrink-0 pb-8 bg-accent ">
+                <div className="flex-shrink-0 pb-8 bg-accent shadow-xl">
                     <SearchBar />
                 </div>
 
