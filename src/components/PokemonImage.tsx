@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from 'react'
-import { fetchPokemon } from '../Services/ApiService'
+import { useEffect, useState } from 'react'
+import { fetchPokemon } from '../services/ApiService'
 
 interface Sprites {
 	other: {
