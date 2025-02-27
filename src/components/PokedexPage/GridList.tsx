@@ -7,10 +7,10 @@ interface GridListProps {
 }
 
 export const GridList = ({ items, isLoading, hasMore }: GridListProps) => {
-    console.log(items);
+    
     return (
         
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 gap-y-12 py-8 mx-auto justify-items-center overflow-y-auto">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 gap-y-12 py-8 mx-auto justify-items-center overflow-y-auto">
             {items.map((name, index) => (
                 <GridCard key={index} pokemonName={name} />
             ))}

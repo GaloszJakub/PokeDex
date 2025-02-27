@@ -1,5 +1,5 @@
 // src/services/ApiService.ts
-
+const BASE_API_URL = "https://pokeapi.co/api/v2/";
 //Abilites
 interface NamedAPIResource {
 	name: string
@@ -179,6 +179,7 @@ interface Stat {
   }
 
 interface PokemonData {
+  id: number;
   name: string;
   sprites: Sprites;
   types: Type[];
@@ -211,3 +212,4 @@ export async function fetchPokemonList(offset: number = 0, limit: number = 30) {
     if (!response.ok) throw new Error("Failed to fetch Pokémon list");
     return response.json();
 }
+
