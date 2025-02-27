@@ -1,20 +1,16 @@
 import './App.css'
 import Navbar from './components/Navbar'
 import MainPage from './pages/MainPage'
-import { Routes, Route } from "react-router-dom";
-import PokedexPage from './pages/PokedexPage';
-
+import { Routes, Route } from 'react-router-dom'
+import PokedexPage from './pages/PokedexPage'
 
 function App() {
 	return (
-		<div className='flex'>
-		<Navbar />
+		<div className="flex">
+			<Navbar />
 			<Routes>
-				
-				
 				<Route path="/" element={<MainPage />} />
-				<Route path="/Pokedex" element={<PokedexPage/>} />
-				
+				<Route path="/Pokedex" element={<PokedexPage />} />
 			</Routes>
 		</div>
 	)

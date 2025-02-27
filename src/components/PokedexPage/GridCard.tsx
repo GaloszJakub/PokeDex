@@ -4,7 +4,19 @@ import { fetchPokemon } from "../../services/ApiService";
 import Popup from "../Popup";
 
 interface PokemonProps {
-    pokemonName: string;
+	pokemonName: string
+}
+
+interface PokemonStat {
+    name: string;
+    value: number;
+}
+
+interface PokemonData {
+    name: string;
+    image: string;
+    types: string[];
+    stats: PokemonStat[];
 }
 
 interface PokemonStat {
@@ -50,8 +62,8 @@ export default function GridCard({ pokemonName }: PokemonProps) {
         return () => abortController.abort();
     }, [pokemonName]);
 
-    if (error) return <p className="text-red-500">{error}</p>;
-    if (!pokemon) return <p>Ładowanie...</p>;
+	if (error) return <p className="text-red-500">{error}</p>
+	if (!pokemon) return <p>Ładowanie...</p>
 
     return (
         <>

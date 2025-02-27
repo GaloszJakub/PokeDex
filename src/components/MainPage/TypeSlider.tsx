@@ -4,8 +4,9 @@ import { Swiper, SwiperSlide } from 'swiper/react'
 import { Navigation } from 'swiper/modules'
 import 'swiper/css'
 import 'swiper/css/navigation'
-import 'swiper/css/pagination'
 import { getPokemonByType } from '../../services/ApiService'
+import { typeColors } from '../../utils/utils'
+import { FaChevronRight, FaChevronLeft } from 'react-icons/fa6'
 
 interface SlideData {
 	type: string
@@ -24,7 +25,7 @@ export default function TypeCarousel() {
 	useEffect(() => {
 		const fetchData = async () => {
 			try {
-				const types = ['poison', 'ice', 'fire', 'water', 'electric']
+				const types = Object.keys(typeColors)
 				const results = await Promise.all(types.map(type => getPokemonByType(type)))
 				setSlides(results)
 				setLoading(false)
@@ -41,37 +42,51 @@ export default function TypeCarousel() {
 	if (error) return <div>Error: {error}</div>
 
 	return (
-		<div className="max-w-full flex-col w-1/3 border h-full ">
-			<div className="flex justify-between items-center mb-4">
-				<h3 className="text-xl font-bold">Your Title Here</h3>
-				<div className="flex gap-2">
-					<button ref={navigationPrevRef} className="px-4 py-2 bg-gray-200 rounded hover:bg-gray-300">
-						←
+		<div className="max-w-6xl mx-auto px-4 h-full flex flex-col ">
+			<div className="flex justify-between items-center mb-6">
+				<h3 className="text-2xl font-bold text-gray-800">Pokémon Types</h3>
+				<div className="flex gap-3">
+					<button
+						ref={navigationPrevRef}
+						className="p-2 bg-white rounded-full shadow-md hover:shadow-lg transition-shadow">
+						<FaChevronLeft />
 					</button>
-					<button ref={navigationNextRef} className="px-4 py-2 bg-gray-200 rounded hover:bg-gray-300">
-						→
+					<button
+						ref={navigationNextRef}
+						className="p-2 bg-white rounded-full shadow-md hover:shadow-lg transition-shadow">
+						<FaChevronRight />
 					</button>
 				</div>
 			</div>
 
-			<Swiper
-				modules={[Navigation]}
-				navigation={{
-					prevEl: navigationPrevRef.current,
-					nextEl: navigationNextRef.current,
-				}}
-				spaceBetween={30}
-				slidesPerView={3}
-				loop>
-				{slides.map(slide => (
-					<SwiperSlide key={slide.type} className="bg-white rounded-sm">
-						<div className="flex flex-col items-center p-2 border ">
-							<img src={slide.image} alt={slide.name} className="w-24 h-24 object-contain" />
-							<h3 className="mt-4 text-2xl font-bold capitalize">{slide.type}</h3>
-						</div>
-					</SwiperSlide>
-				))}
-			</Swiper>
+			<div className="flex-1 mb-4">
+				<Swiper
+					modules={[Navigation]}
+					navigation={{
+						prevEl: navigationPrevRef.current,
+						nextEl: navigationNextRef.current,
+					}}
+					spaceBetween={20}
+					slidesPerView={2}
+					breakpoints={{
+						640: { slidesPerView: 2 },
+						1024: { slidesPerView: 3 },
+					}}
+					loop
+					className="h-max">
+					{slides.map(slide => (
+						<SwiperSlide key={slide.type} className={`rounded-xl overflow-hidden relative ${typeColors[slide.type]}`}>
+							<div className="bg-gradient-to-b from-transparent to-black/30 absolute inset-0" />
+							<div className="flex flex-col h-full p-4 relative">
+								<div className="flex-1 flex items-center p-4">
+									<img src={slide.image} alt={slide.name} className="w-full h-40 object-contain drop-shadow-lg" />
+								</div>
+								<h3 className="text-xl font-semibold text-center text-white drop-shadow-md">{slide.type}</h3>
+							</div>
+						</SwiperSlide>
+					))}
+				</Swiper>
+			</div>
 		</div>
 	)
 }
