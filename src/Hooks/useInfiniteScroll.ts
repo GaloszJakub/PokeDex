@@ -18,6 +18,9 @@ export const useInfiniteScroll = (
             if (scrollPosition >= scrollThreshold && !isLoading && hasMore) {
                 loadMore();
             }
+            if (container.scrollHeight < 330 && !isLoading && hasMore) {
+                loadMore();
+            }
         };
 
         container.addEventListener("scroll", handleScroll);

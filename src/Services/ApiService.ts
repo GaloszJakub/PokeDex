@@ -55,6 +55,8 @@ interface PokemonTypeData {
 	}[]
 }
 
+
+
 interface PokemonDetails {
 	sprites: {
 		other: {
@@ -68,6 +70,7 @@ interface PokemonDetails {
 			name: string
 		}
 	}[]
+	
 }
 
 export const getPokemonByType = async (type: string) => {
@@ -103,18 +106,40 @@ interface Type {
 		name: string
 	}
 }
+
+
+interface Stat {
+	base_stat: number; // Brakowało tej wartości!
+	stat: {
+	  name: string;
+	};
+  }
+
 interface PokemonData {
-	name: string
-	sprites: Sprites
-	types: Type[]
+  name: string;
+  sprites: Sprites;
+  types: Type[];
+  stats: Stat[]; 
 }
 
-export async function fetchPokemon(name: string): Promise<PokemonData> {
-	const res = await fetch(`https://pokeapi.co/api/v2/pokemon/${name}`)
-	if (!res.ok) throw new Error('Błąd sieciowy')
-	return res.json() as Promise<PokemonData>
+export async function fetchPokemon(
+    name: string, 
+    signal?: AbortSignal
+): Promise<PokemonData> {
+    const res = await fetch(`https://pokeapi.co/api/v2/pokemon/${name}`, { 
+        signal 
+    });
+    
+    if (!res.ok) {
+        throw new Error(
+            res.status === 404 
+            ? "Pokémon nie znaleziony" 
+            : "Błąd serwera"
+        );
+    }
+    
+    return res.json() as Promise<PokemonData>;
 }
-
 
 
 // services/ApiService.ts

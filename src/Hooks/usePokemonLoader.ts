@@ -34,7 +34,7 @@ export const usePokemonLoader = () => {
         }
     };
 
-    // Pierwsze ładowanie
+    
     useEffect(() => {
         loadMore();
     }, []);
