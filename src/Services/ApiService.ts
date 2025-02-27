@@ -86,6 +86,7 @@ interface Stat {
 }
 
 interface PokemonData {
+	id: number
 	name: string
 	sprites: Sprites
 	types: Type[]
