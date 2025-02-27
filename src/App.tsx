@@ -6,7 +6,7 @@ import PokedexPage from './pages/PokedexPage'
 
 function App() {
 	return (
-		<div className="flex">
+		<div className="flex relative">
 			<Navbar />
 			<Routes>
 				<Route path="/" element={<MainPage />} />

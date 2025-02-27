@@ -14,6 +14,7 @@ body {
 	--color-main: #f2f2f2;
 }
 
+/* Ukrycie scrollbara */
 .hide-scrollbar {
 	scrollbar-width: none; /* Dla Firefox */
 	-ms-overflow-style: none; /* Dla Internet Explorer i Edge */
@@ -21,4 +22,36 @@ body {
 
 .hide-scrollbar::-webkit-scrollbar {
 	display: none; /* Dla Chrome, Safari i Opera */
+}
+
+/* Custom scrollbar styles */
+.custom-scrollbar {
+	scrollbar-width: thin; /* Dla Firefox */
+	scrollbar-color: #aaa transparent; /* Dla Firefox */
+}
+
+.custom-scrollbar::-webkit-scrollbar {
+	width: 8px; /* Węższy scrollbar */
+	background: transparent;
+}
+
+.custom-scrollbar::-webkit-scrollbar-track {
+	background: transparent;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb {
+	background-color: #aaa; /* Kolor scrollbara */
+	border-radius: 6px; /* Zaokrąglenie rogów */
+	border: 2px solid transparent; /* Usunięcie domyślnej ramki */
+	background-clip: content-box; /* Zapobiega "rozlewaniu" tła */
+	transition: background-color 0.3s ease; /* Wygładzenie hovera */
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb:hover {
+	background-color: #888; /* Kolor hovera */
+}
+
+.custom-scrollbar::-webkit-scrollbar-button {
+	width: 0;
+	height: 0;
 }

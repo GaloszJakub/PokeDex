@@ -1,7 +1,6 @@
-// src/components/Abilities.tsx
-
 import { useEffect, useState } from 'react'
-import { getAbilitiesList } from '../../../services/ApiService'
+import { getAbilitiesList } from '../../../services/Overview'
+import '../../../index.css'
 
 interface NamedAPIResource {
 	name: string
@@ -29,10 +28,10 @@ export default function Abilities() {
 	if (error) return <div>Error: {error.message}</div>
 
 	return (
-		<div className="h-full">
-			<ul className="list-none h-full overflow-y-auto pr-2">
+		<div className="h-full overflow-y-auto custom-scrollbar">
+			<ul className="list-none pl-5">
 				{abilities.map(ability => (
-					<li key={ability.name} className="text-lg py-1 ">
+					<li key={ability.name} className="text-lg py-1">
 						{ability.name}
 					</li>
 				))}

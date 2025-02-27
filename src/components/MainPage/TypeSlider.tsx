@@ -4,7 +4,7 @@ import { Swiper, SwiperSlide } from 'swiper/react'
 import { Navigation } from 'swiper/modules'
 import 'swiper/css'
 import 'swiper/css/navigation'
-import { getPokemonByType } from '../../services/ApiService'
+import { getPokemonByType } from '../../services/Types'
 import { typeColors } from '../../utils/utils'
 import { FaChevronRight, FaChevronLeft } from 'react-icons/fa6'
 
@@ -48,12 +48,12 @@ export default function TypeCarousel() {
 				<div className="flex gap-3">
 					<button
 						ref={navigationPrevRef}
-						className="p-2 bg-white rounded-full shadow-md hover:shadow-lg transition-shadow">
+						className="p-2 bg-white rounded-full shadow-md hover:shadow-lg transition-shadow cursor-pointer hover:bg-gray-200 duration-150">
 						<FaChevronLeft />
 					</button>
 					<button
 						ref={navigationNextRef}
-						className="p-2 bg-white rounded-full shadow-md hover:shadow-lg transition-shadow">
+						className="p-2 bg-white rounded-full shadow-md hover:shadow-lg transition-shadow cursor-pointer hover:bg-gray-200 duration-150">
 						<FaChevronRight />
 					</button>
 				</div>
@@ -81,7 +81,7 @@ export default function TypeCarousel() {
 								<div className="flex-1 flex items-center p-4">
 									<img src={slide.image} alt={slide.name} className="w-full h-40 object-contain drop-shadow-lg" />
 								</div>
-								<h3 className="text-xl font-semibold text-center text-white drop-shadow-md">{slide.type}</h3>
+								<h3 className="text-xl font-semibold text-center text-white drop-shadow-md uppercase">{slide.type}</h3>
 							</div>
 						</SwiperSlide>
 					))}

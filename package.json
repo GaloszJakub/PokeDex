@@ -11,8 +11,12 @@
   },
   "dependencies": {
     "@fontsource/roboto": "^5.1.1",
+    "@headlessui/react": "^2.2.0",
+    "@heroicons/react": "^2.2.0",
+    "@radix-ui/react-dropdown-menu": "^2.1.6",
     "@tailwindcss/vite": "^4.0.8",
     "@types/swiper": "^6.0.0",
+    "framer-motion": "^12.4.7",
     "pokedex-promise-v2": "^4.2.1",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",

@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react'
-import { getMovesList } from '../../../services/ApiService'
+import { getMovesList } from '../../../services/Overview'
+import '../../../index.css'
 
 interface NamedAPIResource {
 	name: string
@@ -7,14 +8,14 @@ interface NamedAPIResource {
 }
 
 export default function Moves() {
-	const [moves, setmoves] = useState<NamedAPIResource[]>([])
+	const [moves, setMoves] = useState<NamedAPIResource[]>([])
 	const [loading, setLoading] = useState(true)
 	const [error, setError] = useState<Error | null>(null)
 
 	useEffect(() => {
 		getMovesList()
 			.then(data => {
-				setmoves(data)
+				setMoves(data)
 				setLoading(false)
 			})
 			.catch(err => {
@@ -27,10 +28,10 @@ export default function Moves() {
 	if (error) return <div>Error: {error.message}</div>
 
 	return (
-		<div className="h-full">
-			<ul className="list-none h-full overflow-y-auto pr-2">
+		<div className="h-full overflow-y-auto custom-scrollbar">
+			<ul className="list-none pl-5">
 				{moves.map(move => (
-					<li key={move.name} className="text-lg">
+					<li key={move.name} className="text-lg py-1">
 						{move.name}
 					</li>
 				))}

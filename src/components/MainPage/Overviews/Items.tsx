@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react'
-import { getItemsList } from '../../../services/ApiService'
+import { getItemsList } from '../../../services/Overview'
+import '../../../index.css'
 
 interface NamedAPIResource {
 	name: string
@@ -27,10 +28,10 @@ export default function Items() {
 	if (error) return <div>Error: {error.message}</div>
 
 	return (
-		<div className="h-full">
-			<ul className="list-none h-full overflow-y-auto pr-2">
+		<div className="h-full overflow-y-auto custom-scrollbar">
+			<ul className="list-none pl-5">
 				{items.map(item => (
-					<li key={item.name} className="text-lg">
+					<li key={item.name} className="text-lg py-1">
 						{item.name}
 					</li>
 				))}
