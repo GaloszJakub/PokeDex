@@ -11,7 +11,7 @@ export const useInfiniteScroll = (
         if (!container) return;
 
         const handleScroll = () => {
-            // Oblicz pozycję scrolla z 200px marginesem
+           
             const scrollPosition = container.scrollTop + container.clientHeight;
             const scrollThreshold = container.scrollHeight - 200;
 

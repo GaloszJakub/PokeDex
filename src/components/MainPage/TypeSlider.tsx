@@ -6,6 +6,7 @@ import 'swiper/css'
 import 'swiper/css/navigation'
 import { getPokemonByType } from '../../services/ApiService'
 import { typeColors } from '../../utils/utils'
+import { FaChevronRight, FaChevronLeft } from 'react-icons/fa6'
 
 interface SlideData {
 	type: string
@@ -41,38 +42,46 @@ export default function TypeCarousel() {
 	if (error) return <div>Error: {error}</div>
 
 	return (
-		<div className="max-w-full flex flex-col w-2/5  h-full">
-			<div className="flex justify-between items-center mb-4 ">
-				<h3 className="text-xl font-bold">Pokémon Types</h3>
-				<div className="flex gap-2">
-					<button ref={navigationPrevRef} className="px-4 py-2 bg-gray-200 rounded-full hover:bg-gray-300">
-						←
+		<div className="max-w-6xl mx-auto px-4 h-full flex flex-col ">
+			<div className="flex justify-between items-center mb-6">
+				<h3 className="text-2xl font-bold text-gray-800">Pokémon Types</h3>
+				<div className="flex gap-3">
+					<button
+						ref={navigationPrevRef}
+						className="p-2 bg-white rounded-full shadow-md hover:shadow-lg transition-shadow">
+						<FaChevronLeft />
 					</button>
-					<button ref={navigationNextRef} className="px-4 py-2 bg-gray-200 rounded-full hover:bg-gray-300">
-						→
+					<button
+						ref={navigationNextRef}
+						className="p-2 bg-white rounded-full shadow-md hover:shadow-lg transition-shadow">
+						<FaChevronRight />
 					</button>
 				</div>
 			</div>
 
-			<div className="flex-1 overflow-hidden">
+			<div className="flex-1 mb-4">
 				<Swiper
 					modules={[Navigation]}
 					navigation={{
 						prevEl: navigationPrevRef.current,
 						nextEl: navigationNextRef.current,
 					}}
-					spaceBetween={30}
-					slidesPerView={3}
+					spaceBetween={20}
+					slidesPerView={2}
+					breakpoints={{
+						640: { slidesPerView: 2 },
+						1024: { slidesPerView: 3 },
+					}}
 					loop
-					className="h-full">
+					className="h-max">
 					{slides.map(slide => (
-						<SwiperSlide key={slide.type} className={`rounded-sm h-full relative  ${typeColors[slide.type]}`}>
-							<div className="opacity-20 bg-white absolute inset-0 "></div>
-							<div className="flex flex-col h-full p-2 z-20 absolute">
-								<div className="flex-1 flex items-center justify-center  rounded">
-									<img src={slide.image} alt={slide.name} className="w-full h-full max-h-32 object-contain p-" />
+						<SwiperSlide key={slide.type} className={`rounded-xl overflow-hidden relative ${typeColors[slide.type]}`}>
+							<div className="bg-gradient-to-b from-transparent to-black/30 absolute inset-0" />
+							<div className="flex flex-col h-full p-4 relative">
+								<div className="flex-1 flex items-center p-4">
+									<img src={slide.image} alt={slide.name} className="w-full h-40 object-contain drop-shadow-lg" />
 								</div>
-								<h3 className="mt-2 text-lg font-bold text-center capitalize text-white">{slide.type}</h3>
+								<h3 className="text-xl font-semibold text-center text-white drop-shadow-md">{slide.type}</h3>
 							</div>
 						</SwiperSlide>
 					))}
