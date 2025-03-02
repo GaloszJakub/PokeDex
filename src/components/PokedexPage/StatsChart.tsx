@@ -1,5 +1,5 @@
 import { useEffect, useRef } from "react";
-import { Chart, ChartConfiguration, ChartTypeRegistry } from "chart.js/auto";
+import { Chart, ChartConfiguration } from "chart.js/auto";
 
 interface PokemonStat {
     name: string;
@@ -51,7 +51,7 @@ export default function PokemonStatsChart({ stats }: PokemonChartProps) {
                         ],
                     },
                     options: {
-                        
+                    
                         
                     },
                 };
