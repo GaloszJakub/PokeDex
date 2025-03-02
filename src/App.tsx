@@ -9,8 +9,8 @@ function App() {
 		<div className="flex relative">
 			<Navbar />
 			<Routes>
-				<Route path="/" element={<MainPage />} />
-				<Route path="/Pokedex" element={<PokedexPage />} />
+				<Route path="/PokeDex" element={<MainPage />} />
+				<Route path="/PokedexList" element={<PokedexPage />} />
 			</Routes>
 		</div>
 	)

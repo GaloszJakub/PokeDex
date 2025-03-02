@@ -36,6 +36,7 @@ export const getPokemonByType = async (type: string) => {
 		return {
 			type: type,
 			image: pokemonData.sprites.other['official-artwork'].front_default,
+			
 		}
 	} catch (error) {
 		throw new Error(`Error fetching ${type} type Pokemon: ${error}`)

@@ -4,11 +4,14 @@ import SearchBar from '../components/MainPage/SearchBar'
 import TypeSlider from '../components/MainPage/TypeSlider'
 
 export default function MainPage() {
+	
 	return (
 		<div className="bg-[#e0e0e0] min-h-screen w-full lg:pl-[270px] pt-10">
 			<div className="max-w-7lg mx-auto flex flex-col gap-6 xl:px-10 ">
 				<div className="h-max flex justify-center w-full">
-					<SearchBar />
+					<SearchBar setSearch={function (_term: string): void {
+						throw new Error('Function not implemented.')
+					} } />
 				</div>
 
 				<div className="">

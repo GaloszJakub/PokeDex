@@ -2,8 +2,7 @@
 import { useEffect, useState, useRef } from 'react'
 import { Swiper, SwiperSlide } from 'swiper/react'
 import { Navigation } from 'swiper/modules'
-import 'swiper/css'
-import 'swiper/css/navigation'
+import 'swiper/swiper-bundle.css';
 import { getPokemonByType } from '../../services/Types'
 import { typeColors } from '../../utils/utils'
 import { FaChevronRight, FaChevronLeft } from 'react-icons/fa6'
@@ -11,7 +10,7 @@ import { FaChevronRight, FaChevronLeft } from 'react-icons/fa6'
 interface SlideData {
 	type: string
 	image: string
-	name: string
+	
 }
 
 export default function TypeCarousel() {
@@ -79,7 +78,7 @@ export default function TypeCarousel() {
 							<div className="bg-gradient-to-b from-transparent to-black/30 absolute inset-0" />
 							<div className="flex flex-col h-full p-4 relative">
 								<div className="flex-1 flex items-center p-4">
-									<img src={slide.image} alt={slide.name} className="w-full h-40 object-contain drop-shadow-lg" />
+									<img src={slide.image} alt={slide.type} className="w-full h-40 object-contain drop-shadow-lg" />
 								</div>
 								<h3 className="text-xl font-semibold text-center text-white drop-shadow-md uppercase">{slide.type}</h3>
 							</div>
