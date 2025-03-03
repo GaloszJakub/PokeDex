@@ -30,20 +30,16 @@ export interface PokemonDetails {
 // src/services/ApiService.ts
 export const fetchRandomPokemon = async (id: number): Promise<PokemonDetails> => {
 	try {
-		// Fetch basic pokemon data
 		const pokemonRes = await fetch(`https://pokeapi.co/api/v2/pokemon/${id}`)
 		const pokemonData = await pokemonRes.json()
 
-		// Fetch species data
 		const speciesRes = await fetch(pokemonData.species.url)
 		const speciesData: PokemonSpecies = await speciesRes.json()
 
-		// Fetch type data correctly
 		const typeUrls = pokemonData.types.map((t: any) => t.type.url)
 		const typeResponses = await Promise.all(typeUrls.map((url: string) => fetch(url)))
 		const typesData: TypeRelations[] = await Promise.all(typeResponses.map(res => res.json()))
 
-		// Calculate weaknesses
 		const weaknesses = Array.from(
 			new Set(typesData.flatMap(t => t.damage_relations.double_damage_from.map((d: any) => d.name)))
 		)
@@ -79,7 +75,7 @@ interface Type {
 }
 
 interface Stat {
-	base_stat: number // Brakowało tej wartości!
+	base_stat: number
 	stat: {
 		name: string
 	}
