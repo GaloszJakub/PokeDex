@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react'
 import { Swiper, SwiperSlide } from 'swiper/react'
 import { Navigation } from 'swiper/modules'
 import 'swiper/swiper-bundle.css';
-import { fetchRandomPokemon } from '../../services/ApiService'
+import { fetchPokemon } from '../../services/ApiService'
 
 export default function MainSlider() {
 	const [pokemons, setPokemons] = useState<any[]>([])
@@ -23,7 +23,7 @@ export default function MainSlider() {
 				const ids = generateRandomIds()
 				const results = await Promise.all(
 					ids.map(id =>
-						fetchRandomPokemon(id).catch(error => {
+						fetchPokemon(id).catch(error => {
 							console.error(`Failed to fetch Pokemon ${id}:`, error)
 							return null
 						})

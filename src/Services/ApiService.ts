@@ -13,6 +13,19 @@ interface TypeRelations {
 		double_damage_from: Array<{ name: string }>
 	}
 }
+interface Stat {
+	base_stat: number
+	stat: {
+		name: string
+	}
+}
+
+interface ability {
+	name:string
+	url: string
+}
+
+
 
 export interface PokemonDetails {
 	id: number
@@ -25,9 +38,12 @@ export interface PokemonDetails {
 	types: Array<{ type: { name: string } }>
 	description: string
 	weaknesses: string[]
+	stats: Stat[]
+	abilities: ability[]
 }
 
-export const fetchRandomPokemon = async (id: number): Promise<PokemonDetails> => {
+// src/services/ApiService.ts
+export const fetchPokemon = async (id: number | string ): Promise<PokemonDetails> => {
 	try {
 		const pokemonRes = await fetch(`https://pokeapi.co/api/v2/pokemon/${id}`)
 		const pokemonData = await pokemonRes.json()
@@ -52,51 +68,33 @@ export const fetchRandomPokemon = async (id: number): Promise<PokemonDetails> =>
 				speciesData.flavor_text_entries.find((e: any) => e.language.name === 'en')?.flavor_text ||
 				'No description available',
 			weaknesses,
+			stats: pokemonData.stats,
+			abilities: pokemonData.abilities.map((a: any) => ({
+				name: a.ability.name,
+				url: a.ability.url
+			})),
+
 		}
 	} catch (error) {
 		throw new Error(`Error fetching Pokemon ${id}: ${error}`)
 	}
 }
 
-// Pobieranie szczegółowych danych Pokémona
-interface Sprites {
-	other: {
-		'official-artwork': {
-			front_default: string
-		}
-	}
-}
 
-interface Type {
-	type: {
-		name: string
-	}
-}
 
-interface Stat {
-	base_stat: number
-	stat: {
-		name: string
-	}
-}
 
-interface PokemonData {
-	id: number
-	name: string
-	sprites: Sprites
-	types: Type[]
-	stats: Stat[]
-}
 
-export async function fetchPokemon(name: string, signal?: AbortSignal): Promise<PokemonData> {
-	const res = await fetch(`https://pokeapi.co/api/v2/pokemon/${name}`, { signal })
+// export async function fetchPokemon(name: string, signal?: AbortSignal): Promise<PokemonDetails> {
+// 	const res = await fetch(`https://pokeapi.co/api/v2/pokemon/${name}`, {
+// 		signal,
+// 	})
 
-	if (!res.ok) {
-		throw new Error(res.status === 404 ? 'Pokémon nie znaleziony' : 'Błąd serwera')
-	}
+// 	if (!res.ok) {
+// 		throw new Error(res.status === 404 ? 'Pokémon nie znaleziony' : 'Błąd serwera')
+// 	}
 
-	return res.json() as Promise<PokemonData>
-}
+// 	return res.json() as Promise<PokemonDetails>
+// }
 
 // Pobieranie listy Pokémonów (przydatne przy braku filtra)
 export async function fetchPokemonList(offset: number = 0, limit: number = 30) {

@@ -18,16 +18,3 @@ export const typeColors: Record<string, string> = {
     steel: "bg-gray-500",
     fairy: "bg-pink-300",
 };
-
-export const pokemonNames = [
-    "bulbasaur", "ivysaur", "venusaur", "charmander", "charmeleon",
-    "charizard", "squirtle", "wartortle", "blastoise", "caterpie",
-    "metapod", "butterfree", "weedle", "kakuna", "beedrill",
-    "pidgey", "pidgeotto", "pidgeot", "rattata", "spearow",
-    "fearow", "ekans", "arbok", "pikachu", "raichu",
-    "sandshrew", "sandslash", "nidoran-f", "nidorina", "nidoqueen",
-    "nidoran-m", "nidorino", "nidoking", "clefairy", "clefable",
-    "vulpix", "ninetales", "jigglypuff", "wigglytuff", "zubat",
-    "golbat", "oddish", "gloom", "vileplume", "paras",
-    "parasect", "venonat", "venomoth", "diglett", "dugtrio"
-];

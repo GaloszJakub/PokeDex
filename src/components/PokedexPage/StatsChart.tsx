@@ -9,6 +9,7 @@ interface PokemonStat {
 interface PokemonChartProps {
     stats: PokemonStat[];
 }
+
 export default function PokemonStatsChart({ stats }: PokemonChartProps) {
     const chartRef = useRef<HTMLCanvasElement | null>(null);
     const chartInstance = useRef<Chart<"polarArea", number[], string> | null>(null);
@@ -18,14 +19,13 @@ export default function PokemonStatsChart({ stats }: PokemonChartProps) {
             const ctx = chartRef.current.getContext("2d");
 
             if (ctx) {
-                
                 if (chartInstance.current) {
                     chartInstance.current.destroy();
                 }
-                
+
                 const data = stats.map(stat => stat.value);
                 const labels = stats.map(stat => stat.name);
-                
+
                 const config: ChartConfiguration<"polarArea", number[], string> = {
                     type: "polarArea",
                     data: {
@@ -42,37 +42,33 @@ export default function PokemonStatsChart({ stats }: PokemonChartProps) {
                                     "rgba(153, 102, 255,0.5)",
                                     "rgba(255, 159, 64,0.5)",
                                 ],
-                                
                                 borderWidth: 1,
-                                borderColor: [
-                                    "rgba(255, 255, 255)",
-                                ]
+                                borderColor: ["rgba(255, 255, 255)"],
                             },
                         ],
                     },
                     options: {
-                    
+                        
                         
                     },
                 };
 
-                // Utwórz nową instancję wykresu
+                
                 chartInstance.current = new Chart(ctx, config);
             }
         }
 
-        // Sprzątanie przy odmontowaniu komponentu
+       
         return () => {
             if (chartInstance.current) {
                 chartInstance.current.destroy();
             }
         };
-    }, []);
+    }, [stats]);
 
     return (
-        <div>
-            <canvas id="myChart" ref={chartRef}></canvas>
+        <div className="mt-4">
+            <canvas ref={chartRef}></canvas>
         </div>
     );
-};
-
+}

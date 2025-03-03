@@ -3,6 +3,7 @@ import { typeColors } from "../../utils/utils";
 import { fetchPokemon } from "../../services/ApiService";
 import Popup from "../Popup";
 import PokemonStatsChart from "./StatsChart";
+import Abilities from "../MainPage/Overviews/Abilities";
 
 
 
@@ -15,12 +16,20 @@ interface PokemonStat {
     value: number;
 }
 
+interface abilities {
+    name: string
+    url: string
+}
+
 interface PokemonData {
     id:number;
     name: string;
     image: string;
     types: string[];
     stats: PokemonStat[];
+    weaknesses: string[];
+    abilities: abilities[];
+    
 }
 
 
@@ -38,7 +47,7 @@ export default function GridCard({ pokemonName }: PokemonProps) {
 
         async function getPokemon() {
             try {
-                const data = await fetchPokemon(pokemonName, abortController.signal);
+                const data = await fetchPokemon(pokemonName);
                 setPokemon({
                     id: data.id,
                     name: data.name,
@@ -47,7 +56,10 @@ export default function GridCard({ pokemonName }: PokemonProps) {
                     stats: data.stats.map(stat => ({
                         name: stat.stat.name,
                         value: stat.base_stat
-                    }))
+                    })),
+                    weaknesses: data.weaknesses,
+                    abilities: data.abilities
+                    
                 });
             } catch (err) {
                 if (!abortController.signal.aborted) {
@@ -62,6 +74,7 @@ export default function GridCard({ pokemonName }: PokemonProps) {
 
 	if (error) return <p className="text-red-500">{error}</p>
 	if (!pokemon) return <p>Ładowanie...</p>
+    console.log(pokemon)
 
     return (
         <>
@@ -98,10 +111,11 @@ export default function GridCard({ pokemonName }: PokemonProps) {
                     </div>
                 </div>
             </div>
-
+                  
             <Popup isOpen={isPopupOpen} onClose={() => setIsPopupOpen(false)}>
-                <div className="flex flex-col space-y-8">
-                    <div className="flex flex-col  text-center items-center gap-8">
+                <div className="flex flex-col space-y-8 ">
+                    <p className="absolute end-8 text-2xl opacity-60">#{pokemon.id}</p>
+                    <div className="flex flex-col  text-center items-center justify-center gap-8">
                         <img 
                             src={pokemon.image} 
                             alt={pokemon.name} 
@@ -122,9 +136,33 @@ export default function GridCard({ pokemonName }: PokemonProps) {
                             </span>
                         ))}
                     </div>
-                    <PokemonStatsChart stats={pokemon.stats} />
+                    <div className="mx-auto">
+                        <PokemonStatsChart stats={pokemon.stats} />
+                    </div>
+                    <h2 className="text-2xl font-bold my-4">Weaknesses:</h2>
+                    <div className="flex gap-4 flex-wrap">
+                        
+                        {pokemon.weaknesses.map((weakness) => (
+                            <span
+                            key={weakness}
+                            className="px-3 text-md py-1  font-medium capitalize bg-red-100 text-red-800 rounded-full">
+                            {weakness}
+                        </span>
+                        ))}
+                    </div>
+                    <h2 className="text-2xl font-bold">Abilities:</h2>
+                    <div className="flex flex-col gap-2 pb-4 ">
+                        {pokemon.abilities.map((ability) => (
+                            <span 
+                            key={ability.name}
+                            className="bg-zinc-400 rounded-2xl capitalize text-md font-semibold px-2 py-1 w-max">
+                                {ability.name}
+                            </span>
+                        ))}
+                    </div>
                 </div>
             </Popup>
+            
         </>
     );
 }
