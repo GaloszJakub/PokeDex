@@ -101,7 +101,7 @@ export default function GridCard({ pokemonName }: PokemonProps) {
 
             <Popup isOpen={isPopupOpen} onClose={() => setIsPopupOpen(false)}>
                 <div className="flex flex-col space-y-8">
-                    <div className="flex flex-col  text-center items-center gap-8">
+                    <div className="flex   text-center items-center gap-8">
                         <img 
                             src={pokemon.image} 
                             alt={pokemon.name} 
@@ -122,7 +122,9 @@ export default function GridCard({ pokemonName }: PokemonProps) {
                             </span>
                         ))}
                     </div>
-                    <PokemonStatsChart stats={pokemon.stats} />
+                    <div className="scale-90">
+                        <PokemonStatsChart stats={pokemon.stats} />
+                    </div>
                 </div>
             </Popup>
         </>

@@ -18,14 +18,14 @@ export default function PokemonStatsChart({ stats }: PokemonChartProps) {
             const ctx = chartRef.current.getContext("2d");
 
             if (ctx) {
-                // Zniszcz poprzednią instancję wykresu, jeśli istnieje
+                
                 if (chartInstance.current) {
                     chartInstance.current.destroy();
                 }
                 
                 const data = stats.map(stat => stat.value);
                 const labels = stats.map(stat => stat.name);
-                // Konfiguracja wykresu
+                
                 const config: ChartConfiguration<"polarArea", number[], string> = {
                     type: "polarArea",
                     data: {
