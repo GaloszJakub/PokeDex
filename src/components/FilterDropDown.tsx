@@ -2,11 +2,9 @@ import React, { useState, useEffect } from 'react'
 import { Listbox, Transition } from '@headlessui/react'
 import { Fragment } from 'react'
 
-interface FilterProps {
-	onTypesChange: (selectedTypes: string[]) => void
-}
 
-export default function FilterDropDown({ onTypesChange }: FilterProps) {
+
+export default function FilterDropDown() {
 	const [types, setTypes] = useState<string[]>([])
 	const [selectedTypes, setSelectedTypes] = useState<string[]>([])
 	const [isLoading, setIsLoading] = useState(true)
@@ -33,12 +31,7 @@ export default function FilterDropDown({ onTypesChange }: FilterProps) {
 		fetchTypes()
 	}, [])
 
-	useEffect(() => {
-		if (!isLoading && !error && typeof onTypesChange === 'function') {
-			onTypesChange(selectedTypes)
-		}
-	}, [selectedTypes, onTypesChange, isLoading, error])
-
+	
 	return (
 		<div className="fixed top-4 right-4 z-50">
 			{isLoading ? (

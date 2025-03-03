@@ -3,7 +3,6 @@ import { typeColors } from "../../utils/utils";
 import { fetchPokemon } from "../../services/ApiService";
 import Popup from "../Popup";
 import PokemonStatsChart from "./StatsChart";
-import Abilities from "../MainPage/Overviews/Abilities";
 
 
 

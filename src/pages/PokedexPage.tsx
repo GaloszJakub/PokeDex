@@ -29,7 +29,7 @@ export default function PokedexPage() {
 
 	return (
 		<div className="bg-background w-full h-screen rounded-l-2xl lg:pl-[270px] z-30">
-			<FilterDropDown />
+			<FilterDropDown/>
 			<div className="flex flex-col h-full">
 				<div className="flex-shrink-0 pb-8 bg-accent shadow-xl py-10 justify-center flex">
 					<SearchBar setSearch={setSearchTerm} />
