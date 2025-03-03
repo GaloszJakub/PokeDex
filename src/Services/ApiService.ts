@@ -1,6 +1,6 @@
 // src/services/ApiService.ts
 
-//MainSlider
+// Funkcja pobierająca szczegóły losowego Pokémona (istniejąca)
 interface PokemonSpecies {
 	flavor_text_entries: Array<{
 		flavor_text: string
@@ -27,7 +27,6 @@ export interface PokemonDetails {
 	weaknesses: string[]
 }
 
-// src/services/ApiService.ts
 export const fetchRandomPokemon = async (id: number): Promise<PokemonDetails> => {
 	try {
 		const pokemonRes = await fetch(`https://pokeapi.co/api/v2/pokemon/${id}`)
@@ -59,7 +58,7 @@ export const fetchRandomPokemon = async (id: number): Promise<PokemonDetails> =>
 	}
 }
 
-//-----------------------------------------
+// Pobieranie szczegółowych danych Pokémona
 interface Sprites {
 	other: {
 		'official-artwork': {
@@ -90,9 +89,7 @@ interface PokemonData {
 }
 
 export async function fetchPokemon(name: string, signal?: AbortSignal): Promise<PokemonData> {
-	const res = await fetch(`https://pokeapi.co/api/v2/pokemon/${name}`, {
-		signal,
-	})
+	const res = await fetch(`https://pokeapi.co/api/v2/pokemon/${name}`, { signal })
 
 	if (!res.ok) {
 		throw new Error(res.status === 404 ? 'Pokémon nie znaleziony' : 'Błąd serwera')
@@ -101,9 +98,23 @@ export async function fetchPokemon(name: string, signal?: AbortSignal): Promise<
 	return res.json() as Promise<PokemonData>
 }
 
-// services/ApiService.ts
+// Pobieranie listy Pokémonów (przydatne przy braku filtra)
 export async function fetchPokemonList(offset: number = 0, limit: number = 30) {
 	const response = await fetch(`https://pokeapi.co/api/v2/pokemon?offset=${offset}&limit=${limit}`)
 	if (!response.ok) throw new Error('Failed to fetch Pokémon list')
 	return response.json()
+}
+
+// Nowa funkcja – pobieranie listy Pokémonów danego typu
+export async function fetchPokemonByType(type: string) {
+	try {
+		const response = await fetch(`https://pokeapi.co/api/v2/type/${type}`)
+		if (!response.ok) throw new Error(`Error fetching pokemons by type ${type}`)
+		const data = await response.json()
+		// Zwracamy listę nazw Pokémonów
+		const pokemonList = data.pokemon.map((p: any) => p.pokemon.name)
+		return pokemonList
+	} catch (error) {
+		throw new Error(`Error fetching pokemons by type ${type}: ${error}`)
+	}
 }

@@ -19,6 +19,7 @@
     "@radix-ui/react-dropdown-menu": "^2.1.6",
     "@tailwindcss/vite": "^4.0.8",
     "chart.js": "^4.4.8",
+    "flowbite": "^3.1.2",
     "framer-motion": "^12.4.7",
     "gh-pages": "^6.3.0",
     "pokedex-promise-v2": "^4.2.1",
