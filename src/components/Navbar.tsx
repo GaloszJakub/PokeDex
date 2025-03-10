@@ -19,7 +19,7 @@ export default function Navbar() {
 				</Link>
 
 				<div className="space-y-4 px-10">
-					<Link to="/PokeDexList">
+					<Link to="/List">
 						<NavbarButton label="Pokedex" />
 						<NavbarButton label="Moves" />
 						<NavbarButton label="Abilities" />

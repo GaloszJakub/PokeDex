@@ -10,7 +10,7 @@ function App() {
 			<Navbar />
 			<Routes>
 				<Route path="/" element={<MainPage />} />
-				<Route path="/PokeDexList" element={<PokedexPage />} />
+				<Route path="/List" element={<PokedexPage />} />
 			</Routes>
 		</div>
 	)
